@@ -1,0 +1,28 @@
+{
+    "name": "61-car4-sender",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "v1": "*",
+        "radio": "*",
+        "bit": "github:calliope-net/bit#v1.3.0",
+        "Grove": "github:calliope-edu/pxt-grove#v0.2.7",
+        "joystick": "github:calliope-net/joystick#v2.0.4"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "6.0.27",
+        "targetId": "calliopemini"
+    },
+    "supportedTargets": [
+        "calliopemini"
+    ],
+    "preferredEditor": "blocksprj"
+}
