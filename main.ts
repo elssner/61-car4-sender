@@ -25,7 +25,7 @@ qwiicjoystick.beimStart(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Jo
 let aJoy = qwiicjoystick.readArray(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Joystick_x20), qwiicjoystick.eBereich.B_0_255)
 radio.setGroup(240)
 sendeBuffer = i2c.create(4)
-iDisplay = 0
+iDisplay = -1
 loops.everyInterval(400, function () {
     basic.setLedColor(7)
     aJoy = qwiicjoystick.readArray(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Joystick_x20), qwiicjoystick.eBereich.B_0_255)
