@@ -32,7 +32,7 @@ loops.everyInterval(400, function () {
         iMotor = 128
     }
     iServo = oBuffer.getUint8(1)
-    iServo = Math.map(iServo, 0, 255, 45, 135)
+    iServo = Math.round(Math.map(iServo, 0, 255, 45, 135))
     i2c.comment("1 Servo 0..128..255 -> 45..90..135")
     if (i2c.between(iServo, 86, 94)) {
         iServo = 90
