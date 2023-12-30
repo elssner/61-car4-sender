@@ -7,7 +7,8 @@
         "v1": "*",
         "radio": "*",
         "Grove": "github:calliope-edu/pxt-grove#v0.2.7",
-        "i2c": "github:calliope-net/i2c#v2.1.1"
+        "i2c": "github:calliope-net/i2c#v2.1.1",
+        "joystick": "github:calliope-net/joystick#v2.0.4"
     },
     "files": [
         "main.blocks",
