@@ -1,19 +1,43 @@
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
-    btSendeZahl += -5
-    _4digit.show(btSendeZahl)
+    if (iDisplay > 0) {
+        iDisplay += -1
+    }
+    basic.showNumber(iDisplay)
 })
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
-    btSendeZahl += 5
-    _4digit.show(btSendeZahl)
+    if (iDisplay < 3) {
+        iDisplay += 1
+    }
+    basic.showNumber(iDisplay)
 })
-let btSendeZahl = 0
+function fDisplay () {
+    _4digit.show(sendeBuffer.getUint8(iDisplay))
+}
+let iServo = 0
+let iMotor = 0
+let oBuffer: i2c.i2cclass = null
+let iDisplay = 0
+let sendeBuffer: i2c.i2cclass = null
 let _4digit: grove.TM1637 = null
 _4digit = grove.createDisplay(DigitalPin.C16, DigitalPin.C17)
-qwiicjoystick.beimStart(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Joystick_x20))
 radio.setGroup(240)
-btSendeZahl = 90
-loops.everyInterval(200, function () {
-    bit.comment("0 Motor 0..128..255")
-    bit.comment("1 Servo 0..128..255")
-    radio.sendNumber(qwiicjoystick.readJoystick(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Joystick_x20)))
+sendeBuffer = i2c.create(4)
+iDisplay = 0
+loops.everyInterval(300, function () {
+    oBuffer = i2c.i2cReadBuffer(i2c.i2c_eADDR(i2c.eADDR.Joystick_x52), 3)
+    iMotor = oBuffer.getUint8(0)
+    i2c.comment("0 Motor 0..128..255")
+    if (i2c.between(iMotor, 120, 136)) {
+        iMotor = 128
+    }
+    iServo = oBuffer.getUint8(1)
+    iServo = Math.map(iServo, 0, 255, 45, 135)
+    i2c.comment("1 Servo 0..128..255 -> 45..90..135")
+    if (i2c.between(iServo, 86, 94)) {
+        iServo = 90
+    }
+    sendeBuffer.setUint8(0, iMotor)
+    sendeBuffer.setUint8(1, iServo)
+    radio.sendNumber(sendeBuffer.getNumber(NumberFormat.UInt32LE, 0))
+    fDisplay()
 })
