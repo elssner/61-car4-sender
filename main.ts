@@ -23,7 +23,8 @@ _4digit = grove.createDisplay(DigitalPin.C16, DigitalPin.C17)
 radio.setGroup(240)
 sendeBuffer = i2c.create(4)
 iDisplay = 0
-loops.everyInterval(300, function () {
+loops.everyInterval(400, function () {
+    basic.setLedColor(7)
     oBuffer = i2c.i2cReadBuffer(i2c.i2c_eADDR(i2c.eADDR.Joystick_x52), 3)
     iMotor = oBuffer.getUint8(0)
     i2c.comment("0 Motor 0..128..255")
@@ -40,4 +41,5 @@ loops.everyInterval(300, function () {
     sendeBuffer.setUint8(1, iServo)
     radio.sendNumber(sendeBuffer.getNumber(NumberFormat.UInt32LE, 0))
     fDisplay()
+    basic.turnRgbLedOff()
 })

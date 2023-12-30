@@ -6,9 +6,7 @@
         "core": "*",
         "v1": "*",
         "radio": "*",
-        "bit": "github:calliope-net/bit#v1.3.2",
         "Grove": "github:calliope-edu/pxt-grove#v0.2.7",
-        "joystick": "github:calliope-net/joystick#v2.0.4",
         "i2c": "github:calliope-net/i2c#v2.1.1"
     },
     "files": [
