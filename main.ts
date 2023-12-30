@@ -1,18 +1,16 @@
-input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
+input.onButtonEvent(Button.A, input.buttonEventValue(ButtonEvent.Click), function () {
+    iFahrstrecke = 200
+})
+input.onButtonEvent(Button.B, input.buttonEventValue(ButtonEvent.Click), function () {
+    iFahrstrecke = 0
+})
+input.onButtonEvent(Button.A, input.buttonEventValue(ButtonEvent.Hold), function () {
     if (iDisplay > 0) {
         iDisplay += -1
     }
     basic.showNumber(iDisplay)
 })
-input.onButtonEvent(Button.AB, input.buttonEventClick(), function () {
-    iFahrstrecke = 30
-    basic.setLedColor(0x00ff00)
-    sendeBuffer.setUint8(0, 155)
-    sendeBuffer.setUint8(1, 90)
-    sendeBuffer.setUint8(2, iFahrstrecke)
-    radio.sendNumber(sendeBuffer.getNumber(NumberFormat.UInt32LE, 0))
-})
-input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
+input.onButtonEvent(Button.B, input.buttonEventValue(ButtonEvent.Hold), function () {
     if (iDisplay < 3) {
         iDisplay += 1
     }
@@ -23,9 +21,6 @@ function fDisplay () {
         _4digit.show(sendeBuffer.getUint8(iDisplay))
     }
 }
-input.onButtonEvent(Button.AB, input.buttonEventValue(ButtonEvent.Hold), function () {
-    iFahrstrecke = 0
-})
 let iServo = 0
 let iMotor = 0
 let iFahrstrecke = 0
@@ -60,7 +55,11 @@ loops.everyInterval(400, function () {
         radio.sendNumber(sendeBuffer.getNumber(NumberFormat.UInt32LE, 0))
         basic.turnRgbLedOff()
     } else {
-    	
+        i2c.comment("iFahrstrecke nicht 0")
+        sendeBuffer.setUint8(0, 55)
+        sendeBuffer.setUint8(1, 90)
+        sendeBuffer.setUint8(2, iFahrstrecke)
+        radio.sendNumber(sendeBuffer.getNumber(NumberFormat.UInt32LE, 0))
     }
     fDisplay()
 })
