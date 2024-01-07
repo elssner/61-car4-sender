@@ -1,6 +1,9 @@
 input.onButtonEvent(Button.A, input.buttonEventValue(ButtonEvent.Click), function () {
     iFahrstrecke = 200
 })
+function car4sender61 () {
+	
+}
 input.onButtonEvent(Button.B, input.buttonEventValue(ButtonEvent.Click), function () {
     iFahrstrecke = 0
 })
@@ -36,7 +39,7 @@ iDisplay = -1
 iFahrstrecke = 0
 loops.everyInterval(400, function () {
     if (iFahrstrecke == 0) {
-        basic.setLedColor(7)
+        basic.setLedColor(0x007fff)
         aJoy = qwiicjoystick.readArray(qwiicjoystick.qwiicjoystick_eADDR(qwiicjoystick.eADDR.Joystick_x20), qwiicjoystick.eBereich.B_0_255)
         iMotor = aJoy[0]
         i2c.comment("0 Motor 0..128..255")
